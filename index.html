@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Recharge</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+
+body{
+background:#020202;
+color:#fff;
+padding:18px;
+overflow:hidden;
+}
+
+/* 🌌 AURORA BACKGROUND */
+.bg{
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle at 20% 30%, #22c55e22, transparent 40%),
+radial-gradient(circle at 80% 70%, #facc1522, transparent 40%),
+radial-gradient(circle at 50% 50%, #3b82f622, transparent 50%);
+animation:aurora 18s linear infinite;
+z-index:-1;
+}
+
+@keyframes aurora{
+0%{transform:translate(0,0);}
+50%{transform:translate(-8%,-10%);}
+100%{transform:translate(0,0);}
+}
+
+/* HEADER */
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+animation:fadeDown 0.6s ease;
+}
+
+.logo{font-size:19px;font-weight:700;letter-spacing:0.5px;}
+
+.badge{
+background:linear-gradient(135deg,#facc15,#eab308);
+color:#000;
+padding:5px 12px;
+border-radius:12px;
+font-size:10px;
+box-shadow:0 0 15px #facc1555;
+}
+
+/* HERO GLASS */
+.hero{
+padding:22px;
+border-radius:22px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(30px);
+border:1px solid rgba(255,255,255,0.1);
+margin-bottom:20px;
+position:relative;
+overflow:hidden;
+}
+
+/* shimmer */
+.hero::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.2),transparent);
+animation:shine 6s infinite;
+}
+
+@keyframes shine{
+0%{left:-100%;}
+100%{left:100%;}
+}
+
+.heroTitle{font-size:20px;font-weight:700;}
+.heroSub{font-size:12px;opacity:0.6;margin-top:5px;}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+/* CARD */
+.card{
+padding:20px;
+border-radius:20px;
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,0.08);
+cursor:pointer;
+position:relative;
+overflow:hidden;
+transition:0.25s;
+}
+
+/* shimmer */
+.card::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
+animation:sweep 5s infinite;
+}
+
+@keyframes sweep{
+0%{left:-100%;}
+100%{left:100%;}
+}
+
+/* SELECT */
+.card.selected{
+border-color:#22c55e;
+box-shadow:0 0 35px #22c55e66;
+transform:scale(1.05);
+}
+
+/* tick */
+.tick{
+position:absolute;
+top:10px;
+right:10px;
+opacity:0;
+transform:scale(0);
+transition:0.3s;
+}
+
+.card.selected .tick{
+opacity:1;
+transform:scale(1);
+}
+
+/* TEXT */
+.amount{font-size:21px;font-weight:700;}
+.small{font-size:11px;opacity:0.6;}
+
+/* PRESS */
+.card:active{transform:scale(0.92);}
+
+/* BUTTON */
+.btn{
+margin-top:20px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:30px;
+background:#222;
+color:#777;
+font-weight:600;
+transition:0.3s;
+position:relative;
+overflow:hidden;
+}
+
+/* active */
+.btn.active{
+background:linear-gradient(135deg,#22c55e,#16a34a);
+color:#fff;
+box-shadow:0 0 30px #22c55e66;
+transform:scale(1.05);
+}
+
+/* loading */
+.btn.loading{
+pointer-events:none;
+background:#111;
+color:#aaa;
+}
+
+/* ripple */
+.ripple{
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,0.4);
+transform:scale(0);
+animation:ripple 0.6s linear;
+}
+
+@keyframes ripple{
+to{transform:scale(6);opacity:0;}
+}
+
+/* footer */
+.footer{
+margin-top:15px;
+text-align:center;
+font-size:11px;
+opacity:0.5;
+}
+
+/* ANIM */
+@keyframes fadeDown{
+from{opacity:0;transform:translateY(-20px);}
+to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="header">
+<div class="logo">Free Recharge</div>
+<div class="badge">PRO MAX</div>
+</div>
+
+<div class="hero">
+<div class="heroTitle">Select Recharge Amount</div>
+<div class="heroSub">Premium unlock experience</div>
+</div>
+
+<div class="grid">
+<div class="card" onclick="selectCard(event,this,100)">
+<div class="tick">✔</div>
+<div class="amount">₹100</div>
+<div class="small">Quick</div>
+</div>
+
+<div class="card" onclick="selectCard(event,this,200)">
+<div class="tick">✔</div>
+<div class="amount">₹200</div>
+<div class="small">Popular</div>
+</div>
+
+<div class="card" onclick="selectCard(event,this,400)">
+<div class="tick">✔</div>
+<div class="amount">₹400</div>
+<div class="small">Pro</div>
+</div>
+
+<div class="card" onclick="selectCard(event,this,500)">
+<div class="tick">✔</div>
+<div class="amount">₹500</div>
+<div class="small">VIP</div>
+</div>
+</div>
+
+<button class="btn" id="btn">Continue</button>
+
+<div class="footer">Secure • Verified • Fast Processing</div>
+
+<script>
+let selected=null;
+
+function selectCard(e,el,amount){
+
+// ripple
+let r=document.createElement("span");
+r.className="ripple";
+r.style.left=e.offsetX+"px";
+r.style.top=e.offsetY+"px";
+el.appendChild(r);
+setTimeout(()=>r.remove(),600);
+
+// select
+document.querySelectorAll(".card").forEach(c=>c.classList.remove("selected"));
+el.classList.add("selected");
+selected=amount;
+
+// enable btn
+let btn=document.getElementById("btn");
+btn.classList.add("active");
+
+btn.onclick=()=>{
+btn.classList.add("loading");
+btn.innerText="Processing...";
+
+setTimeout(()=>{
+localStorage.setItem("amount",selected);
+window.location="channels.html";
+},1000);
+}
+}
+</script>
+
+</body>
+</html>
