@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+
+body{
+background:#050505;
+color:#fff;
+padding:18px;
+padding-bottom:120px;
+overflow-y:auto;
+}
+
+/* BG */
+.bg{
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle at 20% 30%, #22c55e20, transparent 40%),
+radial-gradient(circle at 80% 70%, #facc1520, transparent 40%);
+animation:move 18s linear infinite;
+z-index:-1;
+}
+@keyframes move{50%{transform:translate(-10%,-10%);}}
+
+/* UI */
+.title{font-size:22px;font-weight:700;}
+.sub{font-size:13px;opacity:0.5;margin-top:4px;}
+
+.progress{height:6px;background:#111;border-radius:10px;overflow:hidden;margin:15px 0;}
+.progress div{height:100%;width:0%;background:linear-gradient(90deg,#22c55e,#facc15);transition:0.4s;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+.card{
+padding:14px;border-radius:16px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+cursor:pointer;min-height:110px;
+display:flex;flex-direction:column;justify-content:space-between;
+}
+
+.card.joined{border-color:#22c55e;}
+
+.btn{margin-top:10px;padding:6px;border-radius:10px;background:#222;text-align:center;font-size:12px;}
+.card.joined .btn{background:#22c55e;color:#000;}
+
+.continue{
+margin-top:18px;width:100%;padding:14px;
+border:none;border-radius:30px;
+background:#222;color:#777;
+}
+
+.continue.active{
+background:#22c55e;color:#000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="title">Verification</div>
+<div class="sub">Join all channels</div>
+
+<div class="progress"><div id="bar"></div></div>
+
+<div class="grid" id="grid"></div>
+
+<button class="continue" id="btn">Continue</button>
+
+<script>
+
+let links=[
+"https://t.me/+oU-QbbREjx81NzE1",
+"https://t.me/+PKqs7oM1XA05M2Vl",
+"https://t.me/+r72-luRvSXUyOTA9",
+"https://t.me/+0kOI-4T16pRkNDM1",
+"https://t.me/+OTUi0sTq9iE1N2Q9",
+"https://t.me/+IyBMvFx76CVlY2I1",
+"https://t.me/+4nIg5ue0RNxiOWQ1",
+"https://t.me/+AzW2HTDVWVtlMGI1",
+"https://t.me/addlist/arDUJy-LVjM5ZjJl"
+];
+
+let joined=[];
+let grid=document.getElementById("grid");
+
+links.forEach((link,i)=>{
+let div=document.createElement("div");
+div.className="card";
+
+div.innerHTML=`
+<div>
+<div>Channel ${i+1}</div>
+<div style="font-size:11px;opacity:0.5">Tap to join</div>
+</div>
+<div class="btn">Join</div>
+`;
+
+div.onclick=()=>{
+window.open(link);
+
+if(!joined.includes(i)){
+joined.push(i);
+div.classList.add("joined");
+div.querySelector(".btn").innerText="✔";
+update();
+}
+};
+
+grid.appendChild(div);
+});
+
+function update(){
+document.getElementById("bar").style.width=(joined.length/9)*100+"%";
+
+if(joined.length>=7){
+document.getElementById("btn").classList.add("active");
+}
+}
+
+document.getElementById("btn").onclick=function(){
+if(joined.length>=7){
+window.location.href="continue.html"; // 🔥 REDIRECT
+}
+}
+</script>
+
+</body>
+</html>
